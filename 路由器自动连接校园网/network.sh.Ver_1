@@ -1,0 +1,10 @@
+if curl --interface eth1.100 --connect-timeout 2 -m 5 www.baidu.com >/dev/null 2>&1
+then
+	#echo "has been connect!"
+	exit 0
+else
+	curl --interface eth1.100 -d "uid=用户名&psw=密码" "认证服务器/loginradius.php" >/dev/null 2>&1
+	date +%F_%T >>/root/network.log
+	echo "connect success!" >>/root/network.log
+	exit 0
+fi

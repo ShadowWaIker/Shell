@@ -1,0 +1,13 @@
+crontab -l  #查看已有的任务列表
+
+crontab -e  #打开任务列表编辑器，修改任务列表，具体怎么编辑下一部分讲
+
+增加
+
+*/5 * * * * sh /root/network.sh   #每隔五分钟执行联网脚本
+
+service crond reload  #重新载入任务列表
+
+LEDE中的重启
+
+/usr/sbin/crond restart

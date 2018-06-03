@@ -1,0 +1,14 @@
+status=$(curl --interface eth1.100 --connect-timeout 2 -m 5 www.baidu.com) >/dev/null 2>&1
+if [ "$status" != "<h2>Moved</h2>" ]
+then
+	#echo "has been connected!"
+	exit 0
+else
+	curl -s --interface eth1.100 -d "opr=pwdLogin&userName=用户名&pwd=密码&rememberPwd=1" "http://认证服务器/ac_portal/login.php" >./login_status.json
+	date +%F_%T >>/root/network.log
+	echo "账号："$(jsonfilter -i ./login_status.json -e "@.userName") >>/root/network.log
+	echo "状态："$(jsonfilter -i ./login_status.json -e "@.msg") >>/root/network.log
+	#echo "connect success!" >>/root/network.log
+	#echo "need connect!"
+	exit 0
+fi
